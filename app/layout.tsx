@@ -8,7 +8,7 @@ import { AppSidebar } from "@/components/app-sidebar"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Miracle CALLS AND PICTURES",
+  title: "MSCVP",
   description: "MSCVP Dashboard Application",
     generator: 'v0.dev'
 }
