@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
+import { X } from "lucide-react";
 
 type UserData = {
     firstName: string;
@@ -15,84 +18,129 @@ type UserData = {
     timeZone: string;
 };
 
-export default function ColdStorageDetails() {
-    const initialUserData: UserData = {
-        firstName: "Anderson",
-        lastName: "Smith",
-        email: "anderson.smith@gmail.com",
-        phoneNumber: "+1 (555) 555-5555",
-        location: "Dallas, Texas",
-        organization: "Rehiko",
-        designation: "Admin",
-        timeZone: "Eastern Standard Time (EST)",
-    };
-    const [formData, setFormData] = useState<UserData>(initialUserData);
+export default function ColdStorageDetails({ selectedDocDetails }: any) {
+console.log(selectedDocDetails);
+
     return (
-        <div>
-        <Card className="mt-6 ">
-            <div className="flex flex-col md:flex-row h-full">
-                <div className="flex-1 overflow-auto p-6">
-                    <div className="flex justify-between items-center">
-                        <h3 className="text-base font-semibold text-[#121F33]">
-                            Personal Information
+        <div className="w-full max-w-4xl mx-auto">
+            <Card className="flex flex-col h-full">
+                {/* Header */}
+                <CardHeader>
+                    <div className="flex justify-between items-center h-[5px]">
+                        <h3 className="font-semibold text-[17px] ">
+                            Document Details
                         </h3>
-                        <Button
-                            variant="outline"
-                            className="text-[#0065EE] border-[#0065EE] w-[100px] h-[35px] rounded-[6px]"
-                        >
-                            Edit
-                        </Button>
+                        <button className="hover:text-blue-700 cursor-pointer">
+                            <X className="w-4 h-4" />
+                        </button>
                     </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-4">
-                        {[
-                            "Name",
-                            "Email",
-                            "Phone Number",
-                            "Location",
-                            "Organization",
-                            "Designation",
-                            "Time Zone",
-                        ].map((label, index) => (
-                            <div key={index} className="space-y-1">
-                                <p className="text-sm text-[#121F33B2]">{label}</p>
-                                {/* <p className="text-base font-semibold text-[#121F33]">
-                                    {label === "Name"
-                                        ? `${formData.firstName} ${formData.lastName}`
-                                        : formData[
-                                        label.replace(/ /g, "").charAt(0).toLowerCase() +
-                                        label.replace(/ /g, "").slice(1)
-                                        ]}
-                                </p> */}
-                            </div>
-                        ))}
+                </CardHeader>
+                <div className="border-t"></div>
+                {/* Content */}
+                <CardContent className="p-4 sm:p-6 overflow-y-auto flex-1 text-sm text-gray-700">
+                    {/* Document Info */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                        <div>
+                            <p className="font-roboto font-normal text-[16px] leading-[140%] tracking-[0%] text-[#7B809A]">
+                                Instant ID
+                            </p>
+                            <p className="font-roboto font-normal text-[16px] leading-[140%] tracking-[0%] text-[#121F33]">
+                                {selectedDocDetails?.id || "--"}
+                            </p>
+                        </div>
+                        <div>
+                            <p className="font-roboto font-normal text-[16px] leading-[140%] tracking-[0%] text-[#7B809A]">Transaction Type</p>
+                            <p className="font-roboto font-normal text-[16px] leading-[140%] tracking-[0%] text-[#121F33]">{selectedDocDetails?.sender?.transactionType || "--"}</p>
+                        </div>
+                        <div>
+                            <p className="font-roboto font-normal text-[16px] leading-[140%] tracking-[0%] text-[#7B809A]">Purchase Order #</p>
+                            <p className="font-roboto font-normal text-[16px] leading-[140%] tracking-[0%] text-[#121F33]"> {selectedDocDetails?.purchaseOrder || "--"}</p>
+                        </div>
+                        <div>
+                            <p className="font-roboto font-normal text-[16px] leading-[140%] tracking-[0%] text-[#7B809A]">Document #</p>
+                            <p className="font-roboto font-normal text-[16px] leading-[140%] tracking-[0%] text-[#121F33]"> {selectedDocDetails?.docNum || "--"}</p>
+                        </div>
+                        <div>
+                            <p className="font-roboto font-normal text-[16px] leading-[140%] tracking-[0%] text-[#7B809A]">Document Type</p>
+                            <p className="font-roboto font-normal text-[16px] leading-[140%] tracking-[0%] text-[#121F33]"> {selectedDocDetails?.documentType || "--"}</p>
+                        </div>
+                        <div>
+                            <p className="font-roboto font-normal text-[16px] leading-[140%] tracking-[0%] text-[#7B809A]">Document Format</p>
+                            <p className="font-roboto font-normal text-[16px] leading-[140%] tracking-[0%] text-[#121F33]"> {selectedDocDetails?.documentFormat || "--"}</p>
+                        </div>
                     </div>
 
-                    <div className="mt-10">
-                        <div className="flex justify-between items-center">
-                            <h3 className="text-base font-semibold text-[#121F33]">
-                                Security
-                            </h3>
-                            <Button
-                                variant="outline"
-                                className="text-[#0065EE] border-[#0065EE] w-full md:w-[170px] h-[35px] rounded-[6px]"
-                            >
-                                Change Password
-                            </Button>
-                        </div>
-                        <div className="border-t pt-4 space-y-2">
-                            <p className="text-base font-semibold text-[#121F33]">Password</p>
-                            <p className="text-sm text-muted-foreground">
-                                Your password will expire in next 45 days.
-                            </p>
-                            <p className="text-base leading-[120%] text-[#121F33]">
-                                Protect your account by updating your password on a regular
-                                three-month cycle.
-                            </p>
+                    {/* Sender Information */}
+                    <p className="font-semibold mb-2 text-gray-800">Sender Information</p>
+                    <div className="border-t pt-4 mb-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <p className="font-roboto font-normal text-[16px] leading-[140%] tracking-[0%] text-[#7B809A]">Instant ID</p>
+                                <p className="font-roboto font-normal text-[16px] leading-[140%] tracking-[0%] text-[#121F33]"> {selectedDocDetails?.id || "--"}</p>
+                            </div>
+                            <div>
+                                <p className="font-roboto font-normal text-[16px] leading-[140%] tracking-[0%] text-[#7B809A]">Transaction Type</p>
+                                <p className="font-roboto font-normal text-[16px] leading-[140%] tracking-[0%] text-[#121F33]">{selectedDocDetails?.sender?.transactionType || "--"}</p>
+                            </div>
                         </div>
                     </div>
+
+                    {/* Receiver Information */}
+                    <p className="font-semibold mb-2 text-gray-800">Receiver Information</p>
+                    <div className="border-t pt-4">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <p className="font-roboto font-normal text-[16px] leading-[140%] tracking-[0%] text-[#7B809A]">ID</p>
+                                <p className="font-roboto font-normal text-[16px] leading-[140%] tracking-[0%] text-[#121F33]">
+                                    {selectedDocDetails?.receiver?.id || "--"}
+                                </p>
+                            </div>
+                            <div>
+                                <p className="font-roboto font-normal text-[16px] leading-[140%] tracking-[0%] text-[#7B809A]">Name</p>
+                                <p className="font-roboto font-normal text-[16px] leading-[140%] tracking-[0%] text-[#121F33]">{selectedDocDetails?.receiver?.name || "--"}</p>
+                            </div>
+                            <div>
+                                <p className="font-roboto font-normal text-[16px] leading-[140%] tracking-[0%] text-[#7B809A]">ISA #</p>
+                                <p className="font-roboto font-normal text-[16px] leading-[140%] tracking-[0%] text-[#121F33]">{selectedDocDetails?.receiver?.isa || "--"}</p>
+                            </div>
+                            <div>
+                                <p className="font-roboto font-normal text-[16px] leading-[140%] tracking-[0%] text-[#7B809A]">GS #</p>
+                                <p className="font-roboto font-normal text-[16px] leading-[140%] tracking-[0%] text-[#121F33]">{selectedDocDetails?.receiver?.gs || "--"}</p>
+                            </div>
+                            <div>
+                                <p className="font-roboto font-normal text-[16px] leading-[140%] tracking-[0%] text-[#7B809A]">ST #</p>
+                                <p className="font-roboto font-normal text-[16px] leading-[140%] tracking-[0%] text-[#121F33]">{selectedDocDetails?.receiver?.st || "--"}</p>
+                            </div>
+                            <div>
+                                <p className="font-roboto font-normal text-[16px] leading-[140%] tracking-[0%] text-[#7B809A]">ISA Date</p>
+                                <p className="font-roboto font-normal text-[16px] leading-[140%] tracking-[0%] text-[#121F33]">{selectedDocDetails?.receiver?.isaDate || "--"}</p>
+                            </div>
+                            <div>
+                                <p className="font-roboto font-normal text-[16px] leading-[140%] tracking-[0%] text-[#7B809A]">ISA Time</p>
+                                <p className="font-roboto font-normal text-[16px] leading-[140%] tracking-[0%] text-[#121F33]">{selectedDocDetails?.receiver?.isaTime || "--"}</p>
+                            </div>
+                            <div>
+                                <p className="font-roboto font-normal text-[16px] leading-[140%] tracking-[0%] text-[#7B809A]">Status</p>
+                                <p className="font-roboto font-normal text-[16px] leading-[140%] tracking-[0%] text-[#121F33]">{selectedDocDetails?.receiver?.status || "--"}</p>
+                            </div>
+                        </div>
+                    </div>
+                </CardContent>
+
+                {/* Footer Buttons */}
+                <div className="border-t px-4 py-3 flex flex-col sm:flex-row justify-end gap-2">
+                    <Button variant="ghost" className="text-gray-600 w-full sm:w-auto">
+                        Cancel
+                    </Button>
+                    <Button variant="outline" className="border-gray-300 w-full sm:w-auto">
+                        Secondary Button
+                    </Button>
+                    <Button className="bg-blue-600 text-white hover:bg-blue-700 w-full sm:w-auto">
+                        Primary Button
+                    </Button>
                 </div>
-            </div>
-        </Card>
+            </Card>
         </div>
+
     );
 }

@@ -12,7 +12,7 @@ body {
   }
 }
 
-@layer base {
+/* @layer base {
   :root {
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
@@ -82,13 +82,27 @@ body {
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
-}
+} */
 
-@layer base {
+/* @layer base {
   * {
     @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
   }
+} */
+
+
+
+:root {
+  --color-primary: #2563eb;
+  --color-background: #ffffff;
+  --color-text: #000000;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  transition: all 0.3s ease;
 }

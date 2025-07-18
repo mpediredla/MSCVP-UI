@@ -130,90 +130,87 @@ export default function ColdStorage() {
 
             <div className="flex-1 px-4 pt-4 pb-6 md:px-8 space-y-4">
                 <div className="flex justify-center">
-                    <div className="rounded-[10px] bg-white shadow-sm w-full h-auto flex flex-col md:flex-row">
-                        {/* Details Card */}
-                        <div className="flex-1">
-                            <Card className="min-h-[85vh] md:h-[85vh]">
-                                <div className="flex flex-col md:flex-row">
-                                    {/* Left Column - Profile */}
-                                    <div className="flex flex-col items-center justify-start p-6 w-full md:w-[280px]">
-                                        <div className="relative w-[100px] h-[100px] rounded-full overflow-hidden border">
-                                            <Image
-                                                src="/profilePic.jpg"
-                                                alt="Profile Picture"
-                                                layout="fill"
-                                                objectFit="cover"
-                                            />
-                                        </div>
-                                        <p className="mt-4 text-lg font-semibold text-center">{`${formData.firstName} ${formData.lastName}`}</p>
-                                        <p className="text-sm text-muted-foreground text-center">{formData.designation}</p>
-                                        <p className="text-xs text-muted-foreground text-center">{formData.location} - USA</p>
-                                    </div>
+                    <Card className="rounded-[10px] bg-white shadow-sm w-full flex flex-col md:flex-row overflow-hidden min-h-[85vh]">
+                        {/* Left Column - Profile */}
+                        <div className="w-full md:w-[280px] flex flex-col items-center justify-start p-6 border-b md:border-b-0">
+                            <div className="relative w-[100px] h-[100px] rounded-full overflow-hidden border">
+                                <Image
+                                    src="/profilePic.jpg"
+                                    alt="Profile Picture"
+                                    layout="fill"
+                                    objectFit="cover"
+                                />
+                            </div>
+                            <p className="mt-4 text-lg font-semibold text-center">{`${formData.firstName} ${formData.lastName}`}</p>
+                            <p className="text-sm text-muted-foreground text-center">{formData.designation}</p>
+                            <p className="text-xs text-muted-foreground text-center">{formData.location} - USA</p>
+                        </div>
 
-                                    {/* Right Column - Details */}
-                                    <div className="flex-1">
-                                        <CardHeader>
-                                            <div className="flex justify-between items-center flex-wrap gap-2">
-                                                <CardTitle className="text-base font-semibold text-[#121F33]">
-                                                    Personal Information
-                                                </CardTitle>
-                                                <Button
-                                                    variant="outline"
-                                                    className="text-[#0065EE] border-[#0065EE] w-[100px] h-[35px] rounded-[6px]"
-                                                    onClick={openModal}
-                                                >
-                                                    Edit
-                                                </Button>
-                                            </div>
-                                        </CardHeader>
-                                        <CardContent className="space-y-4">
-                                            <div className="border-t pt-4">
-                                                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                                                    {[
-                                                        { label: "Name", value: `${formData.firstName} ${formData.lastName}` },
-                                                        { label: "Email", value: formData.email },
-                                                        { label: "Phone Number", value: formData.phoneNumber },
-                                                        { label: "Location", value: formData.location },
-                                                        { label: "Organization", value: formData.organization },
-                                                        { label: "Designation", value: formData.designation },
-                                                        { label: "Time Zone", value: formData.timeZone },
-                                                    ].map(({ label, value }, index) => (
-                                                        <div key={index} className="min-w-0 break-words space-y-1">
-                                                            <p className="text-sm text-[#121F33B2]">{label}</p>
-                                                            <p className="text-base font-semibold text-[#121F33]">{value}</p>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </div>
+                        {/* Right Column - Details */}
+                        <div className="flex-1 flex flex-col">
+                            <CardHeader>
+                                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+                                    <CardTitle className="text-base font-semibold text-[#121F33]">
+                                        Personal Information
+                                    </CardTitle>
+                                    <Button
+                                        variant="outline"
+                                        className="text-[#0065EE] border-[#0065EE] w-full md:w-[100px] h-[35px] rounded-[6px]"
+                                        onClick={openModal}
+                                    >
+                                        Edit
+                                    </Button>
+                                </div>
+                            </CardHeader>
 
-                                            {/* Security Section */}
-                                            <div className="flex justify-between items-center flex-wrap gap-2">
-                                                <h3 className="pt-10 text-base font-semibold text-[#121F33]">Security</h3>
-                                                <Button
-                                                    variant="outline"
-                                                    className="text-[#0065EE] border-[#0065EE] w-full md:w-[170px] h-[35px] rounded-[6px]"
-                                                    onClick={openPasswordModal}
-                                                >
-                                                    Change Password
-                                                </Button>
+                            <CardContent className="space-y-6">
+                                {/* Info Grid */}
+                                <div className="border-t pt-4">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                                        {[
+                                            { label: "Name", value: `${formData.firstName} ${formData.lastName}` },
+                                            { label: "Email", value: formData.email },
+                                            { label: "Phone Number", value: formData.phoneNumber },
+                                            { label: "Location", value: formData.location },
+                                            { label: "Organization", value: formData.organization },
+                                            { label: "Designation", value: formData.designation },
+                                            { label: "Time Zone", value: formData.timeZone },
+                                        ].map(({ label, value }, index) => (
+                                            <div key={index} className="min-w-0 break-words space-y-1">
+                                                <p className="text-sm text-[#121F33B2]">{label}</p>
+                                                <p className="text-base font-semibold text-[#121F33]">{value}</p>
                                             </div>
-                                            <div className="border-t pt-4 space-y-2">
-                                                <p className="text-base font-semibold text-[#121F33]">Password</p>
-                                                <p className="text-sm text-muted-foreground">
-                                                    Your password will expire in next 45 days.
-                                                </p>
-                                                <p className="text-base leading-[120%] text-[#121F33]">
-                                                    Protect your account by updating your password on a regular three-month cycle.
-                                                </p>
-                                            </div>
-                                        </CardContent>
+                                        ))}
                                     </div>
                                 </div>
-                            </Card>
+
+                                {/* Security Section */}
+                                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-2 pt-6">
+                                    <h3 className="text-base font-semibold text-[#121F33]">Security</h3>
+                                    <Button
+                                        variant="outline"
+                                        className="text-[#0065EE] border-[#0065EE] w-full md:w-[170px] h-[35px] rounded-[6px]"
+                                        onClick={openPasswordModal}
+                                    >
+                                        Change Password
+                                    </Button>
+                                </div>
+
+                                <div className="border-t pt-4 space-y-2">
+                                    <p className="text-base font-semibold text-[#121F33]">Password</p>
+                                    <p className="text-sm text-muted-foreground">
+                                        Your password will expire in next 45 days.
+                                    </p>
+                                    <p className="text-base leading-[120%] text-[#121F33]">
+                                        Protect your account by updating your password on a regular three-month cycle.
+                                    </p>
+                                </div>
+                            </CardContent>
                         </div>
-                    </div>
+                    </Card>
                 </div>
             </div>
+
 
             {/* Modal */}
             {isModalOpen && (
